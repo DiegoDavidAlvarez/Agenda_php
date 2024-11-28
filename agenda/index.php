@@ -46,7 +46,7 @@ require_once("../conexion.php");
                         <td><?php echo $fila['descripcion']; ?></td>
                         <td><?php echo $fila['fecha_creacion']; ?></td>
                         <td><?php echo $fila['propietario']; ?></td>
-                        <td>
+                        <td class="text-center">
                             <span class="badge <?php echo $fila['estado'] === 'Activo' ? 'bg-success' : 'bg-secondary'; ?>">
                                 <?php echo $fila['estado']; ?>
                             </span>
