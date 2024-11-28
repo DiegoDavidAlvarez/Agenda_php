@@ -4,12 +4,12 @@ require_once "../conexion.php";
 require_once ("../auth.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    $id = $_POST['id'];
+    // $id = $_POST['id'];
     $titulo = $_POST['titulo'];
     $fecha_creacion = $_POST['fecha_creacion'];
     $descripcion = $_POST['descripcion'];
     $propietario = $_POST['propietario'];
-    $estado = $_POST['estado'];
+    $estado = $_POST['estado'] == "Activo" ? true : false;
 
     $agenda = new Agenda($conexion);
     $agenda->insertarAgenda($titulo,$fecha_creacion,$descripcion,$propietario,$estado);

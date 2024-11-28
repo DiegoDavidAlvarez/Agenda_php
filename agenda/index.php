@@ -20,36 +20,55 @@ require_once("../auth.php");
         $stmt = mysqli_prepare($conexion, $sql);
         mysqli_stmt_execute($stmt);
         $resultado = mysqli_stmt_get_result($stmt);
-
-        if (mysqli_num_rows($resultado) > 0) {
-            echo "<tr>
-                <th>ID</th>
-                <th>TITULO</th>
-                <th>FECHA CREACION</th>
-                <th>DESCRIPCION</th>
-                <th>PROPIETARIO</th>
-                <th>ESTADO</th>
-                <th>ACCIONES</th>
-                </tr>";
-            while ($fila = mysqli_fetch_assoc($resultado)) {
-                echo "<tr>";
-                echo "<td>" . $fila['id'] . "</td>";
-                echo "<td>" . $fila['titulo'] . "</td>";
-                echo "<td>" . $fila['fecha_creacion'] . "</td>";
-                echo "<td>" . $fila['descripcion'] . "</td>";
-                echo "<td>" . $fila['propietario'] . "</td>";
-                echo "<td>" . $fila['estado'] . "</td>";
-                echo "<td>";
-                echo "<a href='editar.php?id=" . $fila['id'] . "'>Editar</a>";
-                echo "<a href='eliminar.php?id=" . $fila['id'] . "'>Eliminar</a>";
-                echo "</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "O resultados";
-        }
-        mysqli_stmt_close($stmt);
         ?>
+        <?php if (mysqli_num_rows($resultado) > 0): ?>
+            <table border=1>
+                <tr>
+                    <th>ID</th>
+                    <th>TITULO</th>
+                    <th>FECHA CREACION</th>
+                    <th>DESCRIPCION</th>
+                    <th>PROPIETARIO</th>
+                    <th>ESTADO</th>
+                    <th colspan="2">ACCIONES</th>
+                </tr>
+        <?php while ($fila = mysqli_fetch_assoc($resultado)): ?>
+                <tr>
+                    <td>
+                        <?= $fila['id'] ?>
+                    </td>
+                    <td>
+                        <?= $fila['titulo'] ?>
+                    </td>
+                    <td>
+                        <?= $fila['fecha_creacion'] ?>
+                    </td>
+                    <td>
+                        <?= $fila['descripcion'] ?>
+                    </td>
+                    <td>
+                        <?= $fila['propietario'] ?>
+                    </td>
+                    <td>
+                        <?= $fila['estado'] ?>
+                    </td>
+                    <td>
+                        <a href="editar.php?id=<?= $fila['id'] ?>">Editar</a>
+                    </td>
+                    <td>
+                        <a href="eliminar.php?id=<?= $fila['id'] ?>">Eliminar</a>
+                    </td>
+                </tr>
+        <?php endwhile; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="8">
+                    0 resultados
+                </td>
+            </tr>
+        <?php endif; ?>
+            </table>
+        <?php mysqli_stmt_close($stmt); ?>
         <a href="../logout.php">Cerrar Sesión</a>
     </div>
 </body>
