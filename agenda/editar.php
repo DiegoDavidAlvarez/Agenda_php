@@ -1,6 +1,7 @@
 <?php 
 require_once("../clases/agenda.php");
 require_once("../conexion.php");
+require_once("../auth.php");
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];

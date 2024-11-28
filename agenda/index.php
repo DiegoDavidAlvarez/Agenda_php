@@ -1,5 +1,6 @@
 <?php
 require_once("../conexion.php");
+require_once("../auth.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +52,7 @@ require_once("../conexion.php");
                                 <?php echo $fila['estado']; ?>
                             </span>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a href="editar.php?id=<?php echo $fila['id']; ?>" class="btn btn-warning btn-sm">Editar</a>
                             <a href="eliminar.php?id=<?php echo $fila['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta agenda?')">Eliminar</a>
                         </td>

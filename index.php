@@ -16,12 +16,14 @@ if (isset($_SESSION["usuario"]) && isset($_SESSION["autenticado"]) && $_SESSION[
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+
 <body>
     <?php if (isset($_GET["resultado"]) && $_GET["resultado"] == "success"): ?>
         <script>
@@ -36,15 +38,22 @@ if (isset($_SESSION["usuario"]) && isset($_SESSION["autenticado"]) && $_SESSION[
     <?php endif; ?>
     <div class="row">
         <div class="container border border-primary p-4 rounded-4 col-10 col-md-6 col-lg-5 col-xl-4 position-absolute top-50 start-50 translate-middle shadow-lg">
-            <h1>Iniciar Sesión</h1><hr>
-            <form method="POST">
+            <h1>Iniciar Sesión</h1>
+            <hr>
+            <form method="POST" class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="email" class="form-label">Correo electronico:</label>
-                    <input type="email" placeholder="Correo electronico" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                    <input type="email" placeholder="Correo electronico" class="form-control" name="email" id="email" required>
+                    <div class="invalid-feedback">
+                        Ingresa una dirección de correo electronico.
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="pass" class="form-label">Contraseña:</label>
-                    <input type="password" placeholder="Contraseña" class="form-control" name="pass" id="exampleInputPassword1">
+                    <input type="password" placeholder="Contraseña" class="form-control" name="pass" id="exampleInputPassword1" required>
+                    <div class="invalid-feedback">
+                        Ingresa la contraseña.
+                    </div>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Ingresar</button>
@@ -56,5 +65,24 @@ if (isset($_SESSION["usuario"]) && isset($_SESSION["autenticado"]) && $_SESSION[
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        (() => {
+            'use strict'
+
+            const forms = document.querySelectorAll('.needs-validation')
+
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
 </body>
+
 </html>

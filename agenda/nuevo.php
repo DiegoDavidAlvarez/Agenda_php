@@ -1,8 +1,8 @@
 <?php
-session_start();
 require_once("../conexion.php");
 require_once("../clases/agenda.php");
 require_once("../clases/usuario.php");
+require_once("../auth.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $titulo = $_POST['titulo'];
