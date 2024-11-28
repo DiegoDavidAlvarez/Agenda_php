@@ -1,24 +1,37 @@
-<?php
+<?php 
 require_once("../clases/agenda.php");
-require_once ("../conexion.php");
-require_once ("../auth.php");
-if (isset($_GET['id'])){
+require_once("../conexion.php");
+
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM agenda WHERE id=$id";
-    $resultado = mysqli_fetch_assoc($resultado); 
+
+    // Consultar el registro actual
+    $sql = "SELECT * FROM agenda WHERE id = ?";
+    $stmt = mysqli_prepare($conexion, $sql);
+    mysqli_stmt_bind_param($stmt, 'i', $id); // Vincular solo el ID
+    mysqli_stmt_execute($stmt);
+    $resultado = mysqli_stmt_get_result($stmt);
+    $agendaData = mysqli_fetch_assoc($resultado);
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    $id = $_POST['id'];
+
+// Verificar si los datos han sido enviados
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = $_POST['id']; // ID del registro a editar
     $titulo = $_POST['titulo'];
-    $fecha_creacion = $_POST['fecha_creacion'];
     $descripcion = $_POST['descripcion'];
+    $fecha_creacion = $_POST['fecha_creacion'];
     $propietario = $_POST['propietario'];
     $estado = $_POST['estado'];
-
-    $agenda = new Agenda($conexion,$titulo,$fecha_creacion,$descripcion,$propietario,$estado);
-    $agenda->editarAgenda($id);
+    
+    // Crear una instancia de la clase Agenda
+    $agenda = new Agenda($conexion);
+    
+    // Llamar al método editarAgenda
+    $agenda->editarAgenda($id, $titulo, $descripcion, $fecha_creacion, $propietario, $estado);
+    
+    // Redireccionar o mostrar un mensaje de éxito
     header("Location: index.php");
-
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -26,29 +39,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar</title>
+    <title>Editar Agenda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <div>
-        <form method="post">
-           <label >Titulo :</label><br>
-           <input type="text" name="titulo" value="<?php echo $resultado['titulo'] ; ?>"><br>
-           <label >Fecha de Creacion :</label><br>
-           <input type="date" name="fecha_creacion" value="<?php echo $resultado['fecha_creacion'] ; ?>"  required><br>
-           <label >Descripcion :</label><br>
-           <textarea name="descripcion" required></textarea>
-           <label >Propietario:</label><br>
-           <input type="text" name="propietario" value="<?php echo $resultado['propietario'] ; ?>" required><br>
-           <label >Estado:</label><br>
-           <select name="estado" value="<?php echo $resultado['estado'] ; ?>">
-                 <option value="Activo">Activo</option>
-                 <option value="No activo">No activo</option>
-                 <option value="Otros...">Otros...</option>
-           </select>
-           <br>
-           <br>
-           <button type="submit">Actualizar</button>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Editar Agenda</h1>
+        <form method="post" class="border p-4 rounded shadow-sm">
+            <input type="hidden" name="id" value="<?php echo $agendaData['id']; ?>">
+            
+            <div class="row mb-3">
+                <!-- Campo Título -->
+                <div class="col-md-6">
+                    <label for="titulo" class="form-label">Título :</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" value="<?php echo $agendaData['titulo']; ?>" required>
+                </div>
+                <!-- Campo Fecha de Creación -->
+                <div class="col-md-6">
+                    <label for="fecha_creacion" class="form-label">Fecha de creación :</label>
+                    <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" value="<?php echo $agendaData['fecha_creacion']; ?>" required>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <!-- Campo Propietario -->
+                <div class="col-md-6">
+                    <label for="propietario" class="form-label">Propietario :</label>
+                    <input type="text" class="form-control" id="propietario" name="propietario" value="<?php echo $agendaData['propietario']; ?>" required>
+                </div>
+                <!-- Campo Estado -->
+                <div class="col-md-6">
+                    <label for="estado" class="form-label">Estado :</label>
+                    <select class="form-select" id="estado" name="estado" required>
+                        <option value="Activo" <?php echo $agendaData['estado'] === 'Activo' ? 'selected' : ''; ?>>Activo</option>
+                        <option value="No Activo" <?php echo $agendaData['estado'] === 'No Activo' ? 'selected' : ''; ?>>No Activo</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Campo Descripción -->
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción :</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required><?php echo $agendaData['descripcion']; ?></textarea>
+            </div>
+            
+            <!-- Botón Actualizar -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary px-5">Actualizar</button>
+            </div>
         </form>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

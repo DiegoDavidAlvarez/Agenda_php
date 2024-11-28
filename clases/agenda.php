@@ -1,51 +1,65 @@
-
 <?php
+require_once("../conexion.php");
 class Agenda{
-    public $titulo , $fecha_creacion , $descripcion , $propietario , $estado;
-    public $conexion ;
+    public $titulo , $descripcion , $fecha_creacion , $propietario , $estado;
+    public $conexion;
+
 
     //Metodo constructor
-    function __construct($conexion )
+    public function __construct($conexion)
     {
         $this->conexion = $conexion;
     }
-    //Metodo para insertar datos
-    public function insertarAgenda($titulo , $fecha_creacion , $descripcion , $propietario , $estado){
-        $query = "INSERT INTO agenda(titulo ,fecha_creacion ,descripcion , propietario , estado) VALUES(?,?,?,?,?)";
-        $stmt = mysqli_prepare($this->conexion , $query);
-        mysqli_stmt_bind_param($stmt , 'sssss' , $titulo , $fecha_creacion , $descripcion , $propietario , $estado);
+
+    //Metodo para insertar los datos
+    public function insertarAgenda($titulo , $descripcion , $fecha_creacion , $propietario , $estado){
+       $sql = "INSERT INTO agenda(titulo , descripcion , fecha_creacion , propietario , estado) VALUES(?,?,?,?,?)";
+
+       $stmt = mysqli_prepare($this->conexion , $sql);
+       mysqli_stmt_bind_param($stmt , 'sssss', $titulo , $descripcion , $fecha_creacion, $propietario , $estado);
+
+       if (mysqli_stmt_execute($stmt)) {
+         echo "Agenda insertada correctamente";
+       }else {
+        echo " error al insertar los datos";
+       }
+       mysqli_stmt_close($stmt);
+    }
+
+    public function editarAgenda($id, $titulo, $descripcion, $fecha_creacion, $propietario, $estado) {
+        // Consulta SQL para actualizar los datos
+        $sql = "UPDATE agenda SET titulo = ?, descripcion = ?, fecha_creacion = ?, propietario = ?, estado = ? WHERE id = ?";
+        
+        // Preparar la consulta
+        $stmt = mysqli_prepare($this->conexion, $sql);
+        
+        // Vincular los parámetros a la consulta
+        mysqli_stmt_bind_param($stmt, 'sssssi', $titulo, $descripcion, $fecha_creacion, $propietario, $estado, $id);
+        
+        // Ejecutar la consulta y verificar el resultado
+        if (mysqli_stmt_execute($stmt)) {
+            echo "Agenda actualizada correctamente";
+        } else {
+            echo "Error al actualizar la agenda: " . mysqli_error($this->conexion);
+        }
+        
+        // Cerrar la consulta preparada
+        mysqli_stmt_close($stmt);
+    }
+    //Metodo para eliminar
+   // Método para eliminar
+    function eliminarAgenda($id) {
+        $sql = "DELETE FROM agenda WHERE id = ?";
+        $stmt = mysqli_prepare($this->conexion, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $id); // Vincula solo el ID como entero
 
         if (mysqli_stmt_execute($stmt)) {
-            echo "Agenda registrada correctamente";
-        }else {
-            echo "Error al insertar la agenda" . mysqli_error($this->conexion);
+            echo "Registro eliminado correctamente.";
+        } else {
+            echo "Error al eliminar el registro: " . mysqli_error($this->conexion);
         }
         mysqli_stmt_close($stmt);
     }
 
-    //Metodo para editar la agenda
-    public function editarAgenda($id){
-        $sql= "UPDATE agenda SET titulo = ? , fecha_creacion = ? , descripcion = ? , propietario = ? , estado = ? WHERE id=?";
-        $stmt = mysqli_prepare($this->conexion , $sql);
-        mysqli_stmt_bind_param($stmt  , 'sssss' , $this->titulo , $this->fecha_creacion , $this->descripcion , $this->propietario , $this->estado);
-        if (mysqli_stmt_execute($stmt)) {
-            echo "Datos actualizados correctamente";
-        }else {
-            echo "Error al actualizar los datos".mysqli_error($this->conexion);
-        }
-        mysqli_stmt_close($stmt);
-    }
-    //Metodo para eliminar la agenda
-    public function eliminarAgenda($id){
-      $sql= "DELETE FROM agenda WHERE id = ?";
-      $stmt = mysqli_prepare($this->conexion , $sql);
-      mysqli_stmt_bind_param($stmt , 'i',$id);
-      if(mysqli_stmt_execute($stmt)){
-         echo "Agenda eliminada con exito";
-      }else {
-        echo "Error al eliminar la agenda".mysqli_error($this->conexion);
-      }
-      mysqli_stmt_close($stmt);
-    }
+    
 }
-?>
