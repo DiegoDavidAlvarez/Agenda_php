@@ -12,6 +12,7 @@ require_once ("../auth.php");
 </head>
 <body>
     <div>
+        <a href="nuevo.php">Agregar Agenda</a>
         <?php
            $sql = "SELECT *FROM agenda";
            $stmt= mysqli_prepare($conexion , $sql);
