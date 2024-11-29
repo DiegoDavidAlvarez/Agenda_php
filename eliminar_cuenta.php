@@ -2,16 +2,12 @@
 <?php
 require_once "clases/usuario.php";
 require_once "conexion.php";
-session_start();
+require_once("auth.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = mysqli_real_escape_string($conexion, $_POST['email']);
     $pass = $_POST['pass'];
     $usuario = new Usuario($conexion);
-    $usuario->iniciar_sesion($email, $pass);
-}
-if (isset($_SESSION["usuario"]) && isset($_SESSION["autenticado"]) && $_SESSION["autenticado"] == true) {
-    header("Location: agenda/index.php");
-    exit;
+    $usuario->eliminar_cuenta($email, $pass);
 }
 ?>
 <!DOCTYPE html>
@@ -29,24 +25,24 @@ if (isset($_SESSION["usuario"]) && isset($_SESSION["autenticado"]) && $_SESSION[
     <?php if (isset($_GET["resultado"]) && $_GET["resultado"] == "success"): ?>
         <script>
             alert("<?= $_GET["mensaje"] ?>"); // Muestra un mensaje si el registro fue exitoso
-            window.location.href = "index.php"; // Redirige a la misma pagina para limpiar la url
+            window.location.href = "logout.php"; // Redirige a la misma pagina para limpiar la url
         </script>
     <?php elseif (isset($_GET["resultado"]) && $_GET["resultado"] == "error"): ?>
         <script>
             alert("<?= $_GET["mensaje"] ?>");
-            window.location.href = "index.php";
+            window.location.href = "eliminar_cuenta.php";
         </script>
     <?php endif; ?>
     <div class="row">
         <div class="container border border-primary p-4 rounded-4 col-10 col-md-6 col-lg-5 col-xl-4 position-absolute top-50 start-50 translate-middle shadow-lg">
-            <h1>Iniciar Sesión</h1>
+            <h1>Eliminar Cuenta</h1>
             <hr>
             <form method="POST" class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="email" class="form-label"><i class="bi bi-envelope"></i> Correo electronico:</label>
                     <input type="email" placeholder="Escriba aqui..." class="form-control" name="email" id="email" required>
                     <div class="invalid-feedback">
-                        Ingresa una dirección de correo electronico.
+                        Ingresa la dirección de correo electronico.
                     </div>
                 </div>
                 <div class="mb-3">
@@ -57,10 +53,8 @@ if (isset($_SESSION["usuario"]) && isset($_SESSION["autenticado"]) && $_SESSION[
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Ingresar</button>
-                </div>
-                <div class="text-center mt-3">
-                    <a href="registrar.php">¿No tienes una cuenta? Registrarse</a>
+                    <button type="submit" onclick="return confirm('¿Está seguro de que desea eliminar su cuenta?')" class="btn btn-danger">Eliminar</button>
+                    <a class="btn btn-primary" href="agenda/index.php">Regresar</a>
                 </div>
             </form>
         </div>

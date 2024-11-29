@@ -25,6 +25,7 @@ if (isset($_SESSION["usuario"]) && isset($_SESSION["autenticado"]) && $_SESSION[
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Registrar Usuario</title>
 </head>
 
@@ -40,23 +41,23 @@ if (isset($_SESSION["usuario"]) && isset($_SESSION["autenticado"]) && $_SESSION[
             <h1>Registrar Usuario</h1>
             <form method="POST">
                 <div class="mb-3">
-                    <label for="usuario" class="form-label">Usuario</label>
-                    <input type="text" placeholder="Usuario" class="form-control" name="usuario" id="usuario" required>
+                    <label for="usuario" class="form-label"><i class="bi bi-person"></i> Usuario</label>
+                    <input type="text" placeholder="Escriba aqui..." class="form-control" name="usuario" id="usuario" required>
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Correo electronico:</label>
-                    <input type="email" placeholder="Correo electronico" class="form-control" name="email" id="email" required>
+                    <label for="email" class="form-label"><i class="bi bi-envelope"></i> Correo electronico:</label>
+                    <input type="email" placeholder="Escriba aqui..." class="form-control" name="email" id="email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="pass" class="form-label">Contraseña:</label>
-                    <input type="password" placeholder="Contraseña" class="form-control" name="pass" required>
+                    <label for="pass" class="form-label"><i class="bi bi-key"></i> Contraseña:</label>
+                    <input type="password" placeholder="Escriba aqui..." class="form-control" name="pass" required>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Registrar</button><br>
 
                 </div>
                 <div class="text-center mt-3">
-                    <a href="index.php">¿Ya tienes una cuenta ? Iniciar Sesión</a>
+                    <a href="index.php">¿Ya tienes una cuenta? Iniciar Sesión</a>
                 </div>
             </form>
         </div>

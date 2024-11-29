@@ -88,4 +88,34 @@ class Usuario
         
         mysqli_stmt_close($stmt);
     }
+    
+    public function eliminar_cuenta($email, $pass) {
+        $sql = "SELECT * FROM usuario WHERE email = ?";
+        $stmt = mysqli_prepare($this->conexion, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $resultado = mysqli_stmt_get_result($stmt);
+        if (mysqli_num_rows($resultado) > 0) {
+            $usuario = mysqli_fetch_assoc($resultado);
+            if (password_verify($pass, $usuario['pass'])) {
+                $sql = "DELETE FROM usuario WHERE id = ?";
+                $stmt = mysqli_prepare($this->conexion, $sql);
+                mysqli_stmt_bind_param($stmt, "i", $usuario["id"]);
+                if (mysqli_stmt_execute($stmt)) {
+                    header("Location: eliminar_cuenta.php?mensaje=La cuenta se elimino correctamente&resultado=success");
+                    exit;
+                } else {
+                    header("Location: eliminar_cuenta.php?mensaje=No se puedo eliminar la cuenta&resultado=error");
+                    exit;
+                }
+            } else {
+                header("Location: eliminar_cuenta.php?mensaje=Contraseña incorrecta&resultado=error");
+                exit;
+            }
+        } else {
+            header("Location: eliminar_cuenta.php?mensaje=Dirección de correo incorrecta&resultado=error");
+            exit;
+        }
+
+    }
 }
