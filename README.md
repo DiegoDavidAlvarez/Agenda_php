@@ -8,7 +8,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente en tu sistema:
 
 - **Navegador Web** (Chrome, Firefox, Edge, etc.)
 - **Editor de Código** (opcional, como Visual Studio Code o Sublime Text)
-- **Servidor Local** (opcional, como XAMPP, WAMP o Live Server para VS Code)
+- **Servidor Local** (opcional, como Laragon, XAMPP para VS Code)
 
 ## Instalación
 
@@ -16,7 +16,9 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente en tu sistema:
    - Haz clic en el botón **Code** en esta página y selecciona **Download ZIP**.
    - Extrae los archivos en una carpeta de tu elección.
 
-2. **Clonar el repositorio (opcional)**
-   Si prefieres clonar este repositorio, usa el siguiente comando en tu terminal:
-   ```bash
-   git clone https://github.com/usuario/nombre-del-repositorio.git
+2. **Mover tu carpeta a un archivo de servidor local**
+   Copia o mueve la carpeta descargada a la carpeta de servidor local que tengas disponible
+
+3. **Ejecuta tu servidor local**
+   Ejecuta tu servidor local y busca la ruta del archivo descargado en un navegador como "localhost/example.php"
+   
