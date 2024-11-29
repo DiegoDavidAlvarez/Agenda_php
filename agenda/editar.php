@@ -88,6 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="text-center">
                 <button type="submit" class="btn btn-primary px-5">Actualizar</button>
             </div>
+            <div class="text-end">
+                <a href="index.php" class="btn btn-danger">Cancelar</a>
+            </div>
         </form>
     </div>
 

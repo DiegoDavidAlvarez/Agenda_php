@@ -102,8 +102,13 @@ class Usuario
                 $stmt = mysqli_prepare($this->conexion, $sql);
                 mysqli_stmt_bind_param($stmt, "i", $usuario["id"]);
                 if (mysqli_stmt_execute($stmt)) {
-                    header("Location: eliminar_cuenta.php?mensaje=La cuenta se elimino correctamente&resultado=success");
-                    exit;
+                    $sql = "DELETE FROM agenda WHERE propietario = ?";
+                    $stmt = mysqli_prepare($this->conexion, $sql);
+                    mysqli_stmt_bind_param($stmt, "s", $_SESSION["usuario"]);
+                    if (mysqli_stmt_execute($stmt)) {
+                        header("Location: eliminar_cuenta.php?mensaje=La cuenta se elimino correctamente&resultado=success");
+                        exit;
+                    }
                 } else {
                     header("Location: eliminar_cuenta.php?mensaje=No se puedo eliminar la cuenta&resultado=error");
                     exit;
