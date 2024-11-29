@@ -21,14 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];
     $fecha_creacion = $_POST['fecha_creacion'];
-    $propietario = $_POST['propietario'];
     $estado = $_POST['estado'];
     
     // Crear una instancia de la clase Agenda
     $agenda = new Agenda($conexion);
     
     // Llamar al método editarAgenda
-    $agenda->editarAgenda($id, $titulo, $descripcion, $fecha_creacion, $propietario, $estado);
+    $agenda->editarAgenda($id, $titulo, $descripcion, $fecha_creacion, $estado);
     
     // Redireccionar o mostrar un mensaje de éxito
     header("Location: index.php");
@@ -63,17 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             
             <div class="row mb-3">
-                <!-- Campo Propietario -->
-                <div class="col-md-6">
-                    <label for="propietario" class="form-label">Propietario :</label>
-                    <input type="text" class="form-control" id="propietario" name="propietario" value="<?php echo $agendaData['propietario']; ?>" required>
-                </div>
                 <!-- Campo Estado -->
                 <div class="col-md-6">
                     <label for="estado" class="form-label">Estado :</label>
                     <select class="form-select" id="estado" name="estado" required>
-                        <option value="Activo" <?php echo $agendaData['estado'] === 'Activo' ? 'selected' : ''; ?>>Activo</option>
-                        <option value="No Activo" <?php echo $agendaData['estado'] === 'No Activo' ? 'selected' : ''; ?>>No Activo</option>
+                        <option value="Activo" <?php echo $agendaData['estado'] == 'Activo' ? 'selected' : ''; ?>>Activo</option>
+                        <option value="No Activo" <?php echo $agendaData["estado"] == 'No activo' ? 'selected' : ''; ?>>No Activo</option>
                     </select>
                 </div>
             </div>

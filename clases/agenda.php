@@ -26,15 +26,15 @@ class Agenda{
        mysqli_stmt_close($stmt);
     }
 
-    public function editarAgenda($id, $titulo, $descripcion, $fecha_creacion, $propietario, $estado) {
+    public function editarAgenda($id, $titulo, $descripcion, $fecha_creacion, $estado) {
         // Consulta SQL para actualizar los datos
-        $sql = "UPDATE agenda SET titulo = ?, descripcion = ?, fecha_creacion = ?, propietario = ?, estado = ? WHERE id = ?";
+        $sql = "UPDATE agenda SET titulo = ?, descripcion = ?, fecha_creacion = ?, estado = ? WHERE id = ?";
         
         // Preparar la consulta
         $stmt = mysqli_prepare($this->conexion, $sql);
         
         // Vincular los parámetros a la consulta
-        mysqli_stmt_bind_param($stmt, 'sssssi', $titulo, $descripcion, $fecha_creacion, $propietario, $estado, $id);
+        mysqli_stmt_bind_param($stmt, 'ssssi', $titulo, $descripcion, $fecha_creacion, $estado, $id);
         
         // Ejecutar la consulta y verificar el resultado
         if (mysqli_stmt_execute($stmt)) {

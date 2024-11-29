@@ -1,6 +1,6 @@
 <?php
 require_once("../conexion.php");
-session_start();
+require_once("../auth.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,10 +16,8 @@ session_start();
         <button class="btn btn-primary p-1 px-2 m-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
             <i class="bi bi-list"></i>
         </button>
-        <div>
-            <h6>Bienvenido: <?= isset($_SESSION['usuario']) ? $_SESSION['usuario'] : "" ?></h6>
-        </div>
     </div>
+    <!-- Barra desplegable -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
         <div class="offcanvas-header">
             <h4 class="offcanvas-title" id="sidebarLabel">Opciones</h4>
@@ -34,14 +32,18 @@ session_start();
             </div>
         </div>
     </div>
+    <!-- Fin barra desplegable -->
 <div class="container my-5">
     <h1 class="text-center mb-4">Agenda de Notas</h1>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <a href="nuevo.php" class="btn btn-primary">Nueva Agenda</a>
-        <form class="d-flex" method="post" action="buscar_agenda.php">
+        <form class="d-flex" method="post" action="buscar_libro.php">
             <input class="form-control me-2" type="text" id="titulo" name="titulo" placeholder="Buscar por título" required>
             <button class="btn btn-success" type="submit">Buscar</button>
         </form>
+    </div>
+    <div>
+        <h6>Bienvenido: <?= isset($_SESSION['usuario']) ? $_SESSION['usuario'] : "" ?></h6>
     </div>
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
@@ -50,12 +52,11 @@ session_start();
                 <th>Título</th>
                 <th>Descripción</th>
                 <th>Fecha de Creación</th>
-                <th>Propietario</th>
                 <th>Estado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
-         <tbody>
+        <tbody class="text-center">
             <?php
             // Consulta con marcador de posición
             $sql = "SELECT * FROM agenda WHERE propietario = ?";
@@ -78,7 +79,6 @@ session_start();
                         <td><?php echo $fila['titulo']; ?></td>
                         <td><?php echo $fila['descripcion']; ?></td>
                         <td><?php echo $fila['fecha_creacion']; ?></td>
-                        <td><?php echo $fila['propietario']; ?></td>
                         <td>
                             <span class="badge <?php echo $fila['estado'] === 'Activo' ? 'bg-success' : 'bg-secondary'; ?>">
                                 <?php echo $fila['estado']; ?>
