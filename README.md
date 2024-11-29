@@ -22,3 +22,6 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente en tu sistema:
 3. **Ejecuta tu servidor local**
    - Ejecuta tu servidor local y busca la ruta del archivo descargado en un navegador como "localhost/example.php".
    
+4. **Ejecuta el archivo "bd_agenda.sql"**
+   - Abre tu gestor de base de datos y ejecuta el archivo "bd_agenda.sql" para cargar la base de datos de la aplicación.
+   
