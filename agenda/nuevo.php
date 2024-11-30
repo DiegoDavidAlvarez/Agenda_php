@@ -1,17 +1,19 @@
 <?php
 require_once("../conexion.php");
 require_once("../clases/agenda.php");
+require_once("../clases/usuario.php");
 require_once("../auth.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];
-    $fecha_creacion = $_POST['fecha_creacion'];
-    $propietario = $_SESSION['usuario'];
-    $estado = $_POST['estado'];
+    $fecha_creacion = date("Y-m-d H:i:s");
+    $propietario = $_SESSION['email'];
+    $nombre_propietario = $_SESSION['usuario'];
+    $estado = "Activo";
 
     $agenda = new Agenda($conexion);
-    $agenda->insertarAgenda($titulo, $descripcion, $fecha_creacion, $propietario, $estado);
+    $agenda->insertarAgenda($titulo, $descripcion, $fecha_creacion, $propietario, $nombre_propietario, $estado);
 
     header("Location: index.php");
 }
@@ -31,24 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form action="" method="post" class="border p-4 rounded shadow-sm">
             <div class="row mb-3">
                 <!-- Campo Título -->
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label for="titulo" class="form-label">Título :</label>
                     <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ingrese el título" required>
-                </div>
-                <!-- Campo Fecha de Creación -->
-                <div class="col-md-6">
-                    <label for="fecha_creacion" class="form-label">Fecha de creación :</label>
-                    <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <!-- Campo Estado -->
-                <div class="col-md-6">
-                    <label for="estado" class="form-label">Estado :</label>
-                    <select class="form-select" id="estado" name="estado" required>
-                        <option value="Activo">Activo</option>
-                        <option value="No activo">No activo</option>
-                    </select>
                 </div>
             </div>
             <!-- Campo Descripción -->

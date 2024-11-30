@@ -24,6 +24,7 @@ require_once("../auth.php");
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div><hr>
         <div class="offcanvas-body">
+            <h6 class="text-success"><?= $_SESSION['email'] ?></h6><hr>
             <div>
                 <a class="link-danger link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="../logout.php">Cerrar Sesión</a>
             </div><hr>
@@ -36,7 +37,7 @@ require_once("../auth.php");
 <div class="container my-5">
     <h1 class="text-center mb-4">Agenda de Notas</h1>
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <a href="nuevo.php" class="btn btn-primary">Nueva Agenda</a>
+        <a href="nuevo.php" class="btn btn-primary">Nueva Nota</a>
         <form class="d-flex" method="post" action="buscar_libro.php">
             <input class="form-control me-2" type="text" id="titulo" name="titulo" placeholder="Buscar por título" required>
             <button class="btn btn-success" type="submit">Buscar</button>
@@ -63,7 +64,7 @@ require_once("../auth.php");
             $stmt = mysqli_prepare($conexion, $sql);
 
             // Vincular el parámetro (el propietario)
-            mysqli_stmt_bind_param($stmt, "s", $_SESSION['usuario']);
+            mysqli_stmt_bind_param($stmt, "s", $_SESSION['email']);
 
             // Ejecutar la consulta
             mysqli_stmt_execute($stmt);

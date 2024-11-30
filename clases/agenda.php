@@ -12,11 +12,11 @@ class Agenda{
     }
 
     //Metodo para insertar los datos
-    public function insertarAgenda($titulo , $descripcion , $fecha_creacion , $propietario , $estado){
-       $sql = "INSERT INTO agenda(titulo , descripcion , fecha_creacion , propietario , estado) VALUES(?,?,?,?,?)";
+    public function insertarAgenda($titulo , $descripcion , $fecha_creacion , $propietario, $nombre_propietario, $estado){
+       $sql = "INSERT INTO agenda(titulo , descripcion , fecha_creacion , propietario, nombre_propietario, estado) VALUES(?,?,?,?,?,?)";
 
        $stmt = mysqli_prepare($this->conexion , $sql);
-       mysqli_stmt_bind_param($stmt , 'sssss', $titulo , $descripcion , $fecha_creacion, $propietario , $estado);
+       mysqli_stmt_bind_param($stmt , 'ssssss', $titulo , $descripcion , $fecha_creacion, $propietario, $nombre_propietario, $estado);
 
        if (mysqli_stmt_execute($stmt)) {
          echo "Agenda insertada correctamente";
@@ -26,15 +26,15 @@ class Agenda{
        mysqli_stmt_close($stmt);
     }
 
-    public function editarAgenda($id, $titulo, $descripcion, $fecha_creacion, $estado) {
+    public function editarAgenda($id, $titulo, $descripcion, $estado) {
         // Consulta SQL para actualizar los datos
-        $sql = "UPDATE agenda SET titulo = ?, descripcion = ?, fecha_creacion = ?, estado = ? WHERE id = ?";
+        $sql = "UPDATE agenda SET titulo = ?, descripcion = ?, estado = ? WHERE id = ?";
         
         // Preparar la consulta
         $stmt = mysqli_prepare($this->conexion, $sql);
         
         // Vincular los parámetros a la consulta
-        mysqli_stmt_bind_param($stmt, 'ssssi', $titulo, $descripcion, $fecha_creacion, $estado, $id);
+        mysqli_stmt_bind_param($stmt, 'sssi', $titulo, $descripcion, $estado, $id);
         
         // Ejecutar la consulta y verificar el resultado
         if (mysqli_stmt_execute($stmt)) {

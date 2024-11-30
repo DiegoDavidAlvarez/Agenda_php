@@ -20,14 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id']; // ID del registro a editar
     $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];
-    $fecha_creacion = $_POST['fecha_creacion'];
     $estado = $_POST['estado'];
     
     // Crear una instancia de la clase Agenda
     $agenda = new Agenda($conexion);
     
     // Llamar al método editarAgenda
-    $agenda->editarAgenda($id, $titulo, $descripcion, $fecha_creacion, $estado);
+    $agenda->editarAgenda($id, $titulo, $descripcion, $estado);
     
     // Redireccionar o mostrar un mensaje de éxito
     header("Location: index.php");
@@ -44,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Editar Agenda</h1>
+        <h1 class="text-center mb-4">Editar Nota</h1>
         <form method="post" class="border p-4 rounded shadow-sm">
             <input type="hidden" name="id" value="<?php echo $agendaData['id']; ?>">
             
@@ -54,14 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="titulo" class="form-label">Título :</label>
                     <input type="text" class="form-control" id="titulo" name="titulo" value="<?php echo $agendaData['titulo']; ?>" required>
                 </div>
-                <!-- Campo Fecha de Creación -->
-                <div class="col-md-6">
-                    <label for="fecha_creacion" class="form-label">Fecha de creación :</label>
-                    <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" value="<?php echo $agendaData['fecha_creacion']; ?>" required>
-                </div>
-            </div>
-            
-            <div class="row mb-3">
                 <!-- Campo Estado -->
                 <div class="col-md-6">
                     <label for="estado" class="form-label">Estado :</label>

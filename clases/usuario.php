@@ -74,6 +74,7 @@ class Usuario
             
             if (password_verify($pass, $usuario["pass"])) { // Verifica si la contraseña ingresada es la misma que la de la bd
                 $_SESSION["usuario"] =  $usuario["nombre"]; // Crea la variable sesion "usuario con el nombre el user"
+                $_SESSION["email"] =  $usuario["email"];
                 $_SESSION["autenticado"] = true; // Crea la variable "autenticado" como true
                 header("Location: agenda/index.php"); // Redirije a la pagina principal de la app
                 exit;
