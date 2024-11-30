@@ -13,7 +13,6 @@ if (isset($_SESSION["usuario"]) && isset($_SESSION["autenticado"]) && $_SESSION[
     header("Location: agenda/index.php");
     exit;
 }
-hola
 ?>
 <!DOCTYPE html>
 <html lang="es">
