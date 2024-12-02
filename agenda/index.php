@@ -73,7 +73,7 @@ require_once("../auth.php");
             $resultado = mysqli_stmt_get_result($stmt);
 
             // Mostrar resultados en la tabla
-            if (mysqli_num_rows($resultado)):
+            if (mysqli_num_rows($resultado) > 0):
                 while ($fila = mysqli_fetch_assoc($resultado)): ?>
                     <tr>
                         <td><?php echo $fila['id']; ?></td>

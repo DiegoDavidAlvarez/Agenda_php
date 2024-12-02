@@ -46,7 +46,7 @@ if (isset($_SESSION["usuario"]) && isset($_SESSION["autenticado"]) && $_SESSION[
                     <label for="email" class="form-label"><i class="bi bi-envelope"></i> Correo electronico:</label>
                     <input type="email" placeholder="Escriba aqui..." class="form-control" name="email" id="email" required>
                     <div class="invalid-feedback">
-                        Ingresa una dirección de correo electronico.
+                        Ingresa una dirección de correo electronico valida.
                     </div>
                 </div>
                 <div class="mb-3">
