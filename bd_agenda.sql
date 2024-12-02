@@ -23,12 +23,13 @@ USE `bd_agenda`;
 CREATE TABLE IF NOT EXISTS `agenda` (
   `id` int NOT NULL AUTO_INCREMENT,
   `titulo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `fecha_creacion` date NOT NULL,
+  `fecha_creacion` datetime NOT NULL,
   `descripcion` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `propietario` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nombre_propietario` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `estado` tinytext COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -39,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `pass` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- La exportación de datos fue deseleccionada.
 
