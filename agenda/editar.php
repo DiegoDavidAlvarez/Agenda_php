@@ -17,7 +17,6 @@ if (isset($_GET['id'])) {
 
 // Verificar si los datos han sido enviados
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id']; // ID del registro a editar
     $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];
     $estado = $_POST['estado'];
