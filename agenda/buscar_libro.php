@@ -1,5 +1,6 @@
 <?php
 require_once('../conexion.php');
+require_once('../auth.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,13 +15,18 @@ require_once('../conexion.php');
 <div class="container my-5">
     <h2 class="text-center mb-4">Resultados de la Búsqueda:</h2>
     <?php
+    //verifica que la solicitud sea de tipo post
+    //(isset) verfica si el campo titulo del fromulario fue enviado
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['titulo'])) {
+        //Obtiene el valor de titulo , del usuario ingresado
         $titulo = $_POST['titulo'];
 
-        // Consulta para buscar coincidencias en la tabla agenda
+        // La colsulta busca registros en la tabla donde el campo titulo contenga el texto ingresado por el usuario , se usa el operador like , para buscar concidencias
         $sql = "SELECT * FROM agenda WHERE titulo LIKE ?";
         $stmt = mysqli_prepare($conexion, $sql);
+        // indica que puede haber texto antes o despues de la palabra buscada
         $likeTitulo = "%" . $titulo . "%";
+        
         mysqli_stmt_bind_param($stmt, "s", $likeTitulo);
         mysqli_stmt_execute($stmt);
         $resultado = mysqli_stmt_get_result($stmt);

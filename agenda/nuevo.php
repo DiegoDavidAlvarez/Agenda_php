@@ -7,6 +7,7 @@ require_once("../auth.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];
+    //Genera la fecha actual y la hoar
     $fecha_creacion = date("Y-m-d H:i:s");
     $propietario = $_SESSION['email'];
     $nombre_propietario = $_SESSION['usuario'];
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Registrar Nueva Agenda</h1>
-        <form action="" method="post" class="border p-4 rounded shadow-sm">
+        <form  method="post" class="border p-4 rounded shadow-sm">
             <div class="row mb-3">
                 <!-- Campo Título -->
                 <div class="col-md-12">

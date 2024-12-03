@@ -4,14 +4,17 @@ require_once("../conexion.php");
 require_once("../auth.php");
 
 if (isset($_GET['id'])) {
+    //Comprueba si se ha recibido el parametro id
     $id = $_GET['id'];
 
-    // Consultar el registro actual
+    // Selecciona todos los campos del registro , con el id recibido
     $sql = "SELECT * FROM agenda WHERE id = ?";
     $stmt = mysqli_prepare($conexion, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id); // Vincular solo el ID
     mysqli_stmt_execute($stmt);
+    //Obtener todo los resultados
     $resultado = mysqli_stmt_get_result($stmt);
+    //Convierte el resutado en un arreglo
     $agendaData = mysqli_fetch_assoc($resultado);
 }
 
