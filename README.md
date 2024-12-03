@@ -24,4 +24,10 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente en tu sistema:
    
 4. **Ejecuta el archivo "bd_agenda.sql"**
    - Abre tu gestor de base de datos y ejecuta el archivo "bd_agenda.sql" para cargar la base de datos de la aplicación.
+  
+##Integrantes
+- **Diego David Mescco 
+- **Alvaro David Hualla Huaman
+- **Brayan Ttito Mariscal
+- **Franz Moises Palma Umeres
    
