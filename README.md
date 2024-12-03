@@ -26,7 +26,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente en tu sistema:
    - Abre tu gestor de base de datos y ejecuta el archivo "bd_agenda.sql" para cargar la base de datos de la aplicación.
   
 ## Integrantes
-- Diego David Mescco 
+- Diego David Alvares Mescco 
 - Alvaro David Hualla Huaman
 - Brayan Ttito Mariscal
 - Franz Moises Palma Umeres
