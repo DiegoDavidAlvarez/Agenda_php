@@ -12,14 +12,12 @@ require_once("../auth.php");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-        <button class="btn btn-primary p-2 py-1 m-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
-<div class="d-flex" style="justify-content: space-between;">
     <!-- ||| -->
-     <!-- boton de menu desplegable -->
-            <!-- Un icono de lista -->
-            <i class="bi bi-list"></i>
-        </button>
-    </div>
+    <!-- boton de menu desplegable -->
+    <button class="btn btn-primary p-2 py-1 m-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+        <!-- Un icono de lista -->
+        <i class="bi bi-list"></i>
+    </button>
 
     <!-- Barra desplegable -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
