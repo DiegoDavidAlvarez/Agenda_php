@@ -1,4 +1,4 @@
-# Página Web - Instrucciones de Instalación y Uso
+# Agenda de notas - Instrucciones de Instalación y Uso
 
 ¡Gracias por descargar este proyecto! Este archivo README te guiará para instalar y ejecutar los archivos correctamente.
 
