@@ -1,9 +1,6 @@
 <?php
-require_once("../conexion.php");
 class Agenda{
-    public $titulo , $descripcion , $fecha_creacion , $propietario , $estado;
     public $conexion;
-
 
     //Metodo constructor
     public function __construct($conexion)
